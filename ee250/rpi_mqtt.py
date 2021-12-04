@@ -9,8 +9,8 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 
-threshold = 50 # default value
 def custom_callback_threshold(client, userdata, message):
+    global threshold
     msg = message.payload.decode('utf-8', 'strict')
     threshold = int(msg)
 
@@ -24,7 +24,7 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
 
 if __name__ == '__main__':
-
+    threshold = 50 # default value
     led = 3 # D3
     ultrasonic = 4    # D4
     pinMode(led,"OUTPUT")
