@@ -11,15 +11,15 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 
+def custom_callback_led(client, userdata, message):
+    msg = message.payload.decode('utf-8', 'strict')
+    threshold = int(msg)
+
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    """#subscribe to topics of interest here
-    client.subscribe("bekkali/led")
-    client.message_callback_add("bekkali/led", custom_callback_led)
-
-    client.subscribe("bekkali/lcd")
-    client.message_callback_add("bekkali/lcd", custom_callback_lcd)"""
+    client.subscribe("bekkali/threshold")
+    client.message_callback_add("bekkali/threshold", custom_callback_threshold)
 
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
@@ -44,10 +44,10 @@ if __name__ == '__main__':
             distance = grovepi.ultrasonicRead(ultrasonic) # measures distance via ultrasonic sensor
             threshold = 50 # TEMPORARY TEST VALUE
             if (distance <= threshold):
-                #client.publish("bekkali/ultrasonicRanger", 1)
+                client.publish("bekkali/ultrasonicRanger", 1)
                 digitalWrite(led, 1)
             else:
-                #client.publish("bekkali/ultrasonicRanger", 0)
+                client.publish("bekkali/ultrasonicRanger", 0)
                 digitalWrite(led, 0)
         except KeyboardInterrupt:
             digitalWrite(led, 0)
