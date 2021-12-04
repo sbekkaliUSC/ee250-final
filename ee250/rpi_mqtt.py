@@ -51,8 +51,7 @@ if __name__ == '__main__':
                 #client.publish("bekkali/ultrasonicRanger", 0)
                 digitalWrite(led, 0)
         except KeyboardInterrupt:
-            with lock: 
-                digitalWrite(led, 0)
+            digitalWrite(led, 0)
 
         except (IOError,TypeError) as e:
             print("Error")
