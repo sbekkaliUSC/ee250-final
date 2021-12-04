@@ -5,25 +5,9 @@ Source: Reusing parts of code from grovepi_sensors.py and rpi_pub_and_sub.py
 from Lab 2 and 5, respectively.
 """
 
-"""python3 interpreters in Ubuntu (and other linux distros) will look in a 
-default set of directories for modules when a program tries to `import` one. 
-Examples of some default directories are (but not limited to):
-  /usr/lib/python3.5
-  /usr/local/lib/python3.5/dist-packages
-
-The `sys` module, however, is a builtin that is written in and compiled in C for
-performance. Because of this, you will not find this in the default directories.
-"""
 import sys
 import time
 import paho.mqtt.client as mqtt
-
-# By appending the folder of all the GrovePi libraries to the system path here,
-# we are successfully `import grovepi`
-sys.path.append('../../Software/Python/')
-# This append is to support importing the LCD library.
-sys.path.append('../../Software/Python/grove_rgb_lcd')
-
 import grovepi
 from grove_rgb_lcd import *
 
@@ -45,7 +29,7 @@ if __name__ == '__main__':
     led = 3 # D3
     ultrasonic = 4    # D4
     pinMode(led,"OUTPUT")
-    
+
     client = mqtt.Client()
     client.on_message = on_message
     client.on_connect = on_connect
