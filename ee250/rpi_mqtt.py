@@ -1,8 +1,6 @@
 """ EE 250 Final Project
 Team members: Saleem Bekkali
 Repo: https://github.com/sbekkaliUSC/ee250-final
-Source: Reusing parts of code from grovepi_sensors.py and rpi_pub_and_sub.py
-from Lab 2 and 5, respectively.
 """
 
 import sys
@@ -42,7 +40,7 @@ if __name__ == '__main__':
             time.sleep(1)
 
             distance = grovepi.ultrasonicRead(ultrasonic) # measures distance via ultrasonic sensor
-            threshold = 50 # TEMPORARY TEST VALUE
+            threshold = 50 # default value
             if (distance <= threshold):
                 client.publish("bekkali/ultrasonicRanger", 1)
                 digitalWrite(led, 1)
