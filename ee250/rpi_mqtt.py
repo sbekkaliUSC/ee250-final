@@ -11,7 +11,7 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 
-def custom_callback_led(client, userdata, message):
+def custom_callback_threshold(client, userdata, message):
     msg = message.payload.decode('utf-8', 'strict')
     threshold = int(msg)
 
