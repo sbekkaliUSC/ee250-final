@@ -44,7 +44,8 @@ if __name__ == '__main__':
 
     led = 3 # D3
     ultrasonic = 4    # D4
-
+    pinMode(led,"OUTPUT")
+    
     client = mqtt.Client()
     client.on_message = on_message
     client.on_connect = on_connect
