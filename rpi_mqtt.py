@@ -27,6 +27,19 @@ sys.path.append('../../Software/Python/grove_rgb_lcd')
 import grovepi
 from grove_rgb_lcd import *
 
+def on_connect(client, userdata, flags, rc):
+    print("Connected to server (i.e., broker) with result code "+str(rc))
+
+    """#subscribe to topics of interest here
+    client.subscribe("bekkali/led")
+    client.message_callback_add("bekkali/led", custom_callback_led)
+
+    client.subscribe("bekkali/lcd")
+    client.message_callback_add("bekkali/lcd", custom_callback_lcd)"""
+
+def on_message(client, userdata, msg):
+    print("on_message: " + msg.topic + " " + str(msg.payload, "utf-8"))
+
 if __name__ == '__main__':
 
     led = 3 # D3
