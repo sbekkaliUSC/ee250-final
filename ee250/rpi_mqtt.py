@@ -43,14 +43,16 @@ if __name__ == '__main__':
 
             distance = grovepi.ultrasonicRead(ultrasonic) # measures distance via ultrasonic sensor
             threshold = 50 # TEMPORARY TEST VALUE
-
+            print(distance + " " + threshold)
             if (distance <= threshold):
                 #client.publish("bekkali/ultrasonicRanger", 1)
                 digitalWrite(led, 1)
             else:
                 #client.publish("bekkali/ultrasonicRanger", 0)
                 digitalWrite(led, 0)
-
+        except KeyboardInterrupt:
+            with lock: 
+                digitalWrite(led, 0)
 
         except (IOError,TypeError) as e:
             print("Error")
