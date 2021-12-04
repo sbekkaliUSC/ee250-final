@@ -9,7 +9,7 @@ import sys
 import time
 import paho.mqtt.client as mqtt
 import grovepi
-from grove_rgb_lcd import *
+from grovepi import *
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
