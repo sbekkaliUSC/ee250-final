@@ -9,6 +9,7 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 
+threshold = 50 # default value
 def custom_callback_threshold(client, userdata, message):
     msg = message.payload.decode('utf-8', 'strict')
     threshold = int(msg)
@@ -40,7 +41,6 @@ if __name__ == '__main__':
             time.sleep(1)
 
             distance = grovepi.ultrasonicRead(ultrasonic) # measures distance via ultrasonic sensor
-            threshold = 50 # default value
             if (distance <= threshold):
                 client.publish("bekkali/ultrasonicRanger", 1)
                 digitalWrite(led, 1)
